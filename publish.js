@@ -4,6 +4,14 @@ const { writeFileSync } = require('fs')
 const pkg = require('./package.json')
 
 pkg.main = 'lib/index.min.js'
+pkg.module = 'lib/index.min.es.js'
+pkg.exports = {
+  ".": {
+    "import": './lib/index.es.js',
+    "require": './lib/index.umd.js'
+  }
+}
+
 let pkgContent = JSON.stringify(pkg, null, 2)
 writeFileSync(path.join(__dirname, './package.json'), pkgContent)
 
